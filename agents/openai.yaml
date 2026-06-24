@@ -1,0 +1,12 @@
+interface:
+  display_name: "Crypto Architecture Research"
+  short_description: "Map protocol contracts, flows, and fund paths"
+  default_prompt: "Use $crypto-architecture-research to map this protocol's contracts, user flow, and on-chain fund flow from official sources only."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "herd_mcp"
+      description: "Chain inspection and contract relationship MCP"
+      transport: "streamable_http"
+      url: "https://mcp.herd.eco/v1"
