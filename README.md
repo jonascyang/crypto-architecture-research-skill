@@ -15,6 +15,15 @@ Do not use it for price analysis, valuation, market commentary, news summaries, 
 - Separates fund flow from state/accounting flow.
 - Identifies permissions, upgradeability, privileged roles, external dependencies, and unresolved evidence gaps.
 
+## Use Case Showcase
+
+| Question | Output |
+| --- | --- |
+| What assets has this project issued (https://x.com/saturn_credit)? | Maps the project's issued assets, token roles, and official contract addresses. |
+| Introduce the whole mint process of USDat (0x23238f20b894f29041f48D88eE91131C395Aaa71)? | Breaks down the USDat mint process from user action to contract execution. |
+| Who controls the USDat whitelist? | Identifies the on-chain role and wallet that control USDat whitelist permissions. |
+| Explain the money-flow of the mint of USDat. | Traces where user funds move and where USDat backing is finally held. |
+
 ## Structure
 
 ```text
@@ -45,17 +54,19 @@ or:
 
 Avoid installing duplicate copies in both locations at the same time, because duplicate skill names can create routing confusion.
 
-## Evidence Dependencies
+## External MCP Dependencies
 
-- OpenTwitter/opentwitter is used when available to verify official X accounts, official links, address announcements, and migration notices.
-- Herd MCP is preferred for contract metadata, source code, proxy/implementation resolution, events, transaction activity, wallet activity, and HAL-style simulation.
-- Herd CLI may be used as fallback where installed, authenticated, and chain-supported.
+This skill may use external MCP tools for source-backed crypto research:
 
-If Herd evidence is unavailable, the skill should not make live chain-state conclusions. It should continue only with official resource discovery or verified source-code analysis and mark missing evidence clearly.
+- **OpenTwitter MCP**: X/Twitter profiles, tweets, tweet search, follower events, and KOL context. It requires a configured OpenTwitter MCP server and a valid `TWITTER_TOKEN`. See: https://github.com/6551Team/opentwitter-mcp
+- **Herd MCP**: contract metadata, source-code analysis, transaction decoding, wallet/token activity, and related on-chain research tools. It requires a configured Herd MCP server and completed Herd authentication. See: https://docs.herd.eco/herd-mcp/configuration
+
+Credentials and authentication are managed by the host Codex/MCP environment, not by this skill repository. Do not commit tokens, cookies, API keys, or local MCP config files.
+
+If a required MCP tool is unavailable, unauthenticated, or rate-limited, the skill should state the limitation clearly and avoid making tool-dependent claims.
 
 ## Current Status
 
 This is the restored full-instruction version of the skill. It favors research completeness over a small initial context footprint.
 
 Known packaging gap: this copy currently includes `agents/openai.yaml` but not `agents/interface.yaml`.
-
